@@ -16,7 +16,7 @@ export class App extends Component {
     const { searchValue } = this.state;
     return (
       <>
-        <Searchbar onSubmit={this.handleSubmit} />
+        <Searchbar onSubmit={this.onFormSubmit} />
         <ImageGallery value={searchValue} />
       </>
     );
