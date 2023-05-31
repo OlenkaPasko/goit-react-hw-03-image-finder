@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Searchbar } from './Searchbar/Searchbar';
-import ImageGallery from './ImageGallery/ImageGallery';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 
 export class App extends Component {
   state = {
@@ -9,16 +9,39 @@ export class App extends Component {
     searchValue: '',
     page: 1,
   };
+
+  getGallery = (searchValue, page = 1) => {
+    const API_KEY = '35113425-894140f70267936d7d418e310';
+    const BASE_URL = 'https://pixabay.com/api/';
+    return fetch(
+      `${BASE_URL}?key=${API_KEY}&image_type=photo&orientation=horizontal&q=${searchValue}&page=${page}&image_type=photo&orientation=horizontal&per_page=12`
+    ).then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      return Promise.reject(
+        new Error(
+          `На жаль, немає ${searchValue} зображень, які відповідають вашому запиту`
+        )
+      );
+    });
+  };
+
   handleSubmit = searchValue => {
     this.setState({ searchValue });
   };
   render() {
     const { searchValue } = this.state;
+
     return (
       <>
         <Searchbar onSubmit={this.onFormSubmit} />
-        <ImageGallery value={searchValue} />
+        <ImageGallery
+          value={searchValue}
+          loadPage={this.onLoadMore}
+          openModal={this.openModal}
+        />
       </>
     );
   }
-};
+}
