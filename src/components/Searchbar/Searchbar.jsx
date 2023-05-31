@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { Header, SearchForm, SearchInput, SearchBtn } from './Searchbar.styled';
+
 class Searchbar extends Component {
   state = {
-    value: '',
+    value: ''
   };
   onSubmitForm = evt => {
     const { value } = this.state;
@@ -21,29 +23,28 @@ class Searchbar extends Component {
   };
   render() {
     return (
-      <>
-        <header className="searchbar">
-          <form className="form" onSubmit={this.onSubmitForm}>
-            <button type="submit" className="button">
+        <Header>
+          <SearchForm onSubmit={this.onSubmitForm}>
+            <SearchBtn>
               <span className="button-label">Search</span>
-            </button>
-            <input
-              className="input"
+            </SearchBtn>
+            <SearchInput
               type="text"
               autocomplete="off"
               autofocus
               placeholder="Search images and photos"
               onChange={this.onChangeInput}
               value={this.state.value}
+              name="searchInput"
             />
-          </form>
-        </header>
-      </>
+          </SearchForm>
+        </Header>
     );
   }
 }
-export default Searchbar;
-
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
+
+export default Searchbar;
+

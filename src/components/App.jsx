@@ -9,8 +9,6 @@ export class App extends Component {
     collection: null,
     loading: false,
     perPage: '12',
-    showModal: false,
-    modalImg: null,
     alt: null,
   };
   fetchAPI = (text, page) => {
@@ -34,13 +32,13 @@ export class App extends Component {
     const { perPage, value } = this.state;
     if (prevState.perPage !== perPage) {
       this.setState({ loading: true });
-      this.fetchGallery();
+      this.fetchAPI();
       return;
     }
 
     if (prevState.value !== value) {
       this.setState({ loading: true });
-      this.fetchGallery();
+      this.fetchAPI();
       return;
     }
   }
@@ -48,17 +46,16 @@ export class App extends Component {
     const { perPage } = this.state;
     this.setState({ perPage: perPage + 12 });
   };
-  onSubmitForm = value => {
+  onFormSubmit = value => {
     this.setState({ value, perPage: 12, collection: null });
   };
 
-  
   render() {
     const { searchText } = this.state;
-    const { collection, loading} = this.state;
+    const { collection, loading } = this.state;
     return (
       <>
-        <Searchbar onSubmit={this.onSubmitForm} />;
+        <Searchbar onSubmit={this.onFormSubmit} />;
         <ImageGallery
           gallery={collection}
           spinner={loading}
