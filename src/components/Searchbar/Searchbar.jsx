@@ -1,20 +1,35 @@
-import React from 'react';
-//import {Component} from React;
-export class getImages extends Comment {
+import React, { Component } from 'react';
+
+export default class Searchbar extends Component {
+  state = {
+    value: '',
+  };
+  //контрольований інпут(подія на інпут)
+  hendlChange = ({ target: { value } }) => {
+    this.setState({ value });
+  };
+  //так як це форма
+  hendlSudmit = e => {
+    e.preventDefault();
+    console.log(this.state);
+  };
+
   render() {
     return (
       <>
-        <header class="searchbar">
-          <form class="form">
-            <button type="submit" class="button">
-              <span class="button-label">Search</span>
+        <header className="searchbar">
+          <form className="form" onSubmit={this.hendlSudmit}>
+            <button type="submit" className="button">
+              <span className="button-label">Search</span>
             </button>
             <input
-              class="input"
+              className="input"
               type="text"
               autocomplete="off"
               autofocus
               placeholder="Search images and photos"
+              onChange={this.hendlChange}
+              value={this.state}
             />
           </form>
         </header>
