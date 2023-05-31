@@ -11,7 +11,8 @@ export default class Searchbar extends Component {
   //так як це форма
   hendlSudmit = e => {
     e.preventDefault();
-    console.log(this.state);
+      console.log(this.state);
+      this.props.hendlSearch(this.state.value)
   };
 
   render() {
@@ -29,7 +30,7 @@ export default class Searchbar extends Component {
               autofocus
               placeholder="Search images and photos"
               onChange={this.hendlChange}
-              value={this.state}
+              value={this.state.value}
             />
           </form>
         </header>
