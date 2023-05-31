@@ -51,16 +51,14 @@ export class App extends Component {
   onSubmitForm = value => {
     this.setState({ value, perPage: 12, collection: null });
   };
-  //інпут
-  hendlSearch = text => {
-    this.setState({ searchText: text });
-  };
+
+  
   render() {
     const { searchText } = this.state;
     const { collection, loading} = this.state;
     return (
       <>
-        <Searchbar hendlSearch={this.hendlSearch} />;
+        <Searchbar onSubmit={this.onSubmitForm} />;
         <ImageGallery
           gallery={collection}
           spinner={loading}

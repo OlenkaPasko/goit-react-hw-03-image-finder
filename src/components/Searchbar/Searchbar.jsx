@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Searchbar extends Component {
   state = {
     value: '',
   };
-  //контрольований інпут(подія на інпут)
-  hendlChange = ({ target: { value } }) => {
+  onSubmitForm = evt => {
+    const { value } = this.state;
+    evt.preventDefault();
+    if (value.trim() === '') {
+      alert('Please, type any words');
+      return;
+    }
+    this.setState({ value: '' });
+    evt.target.elements.searchInput.blur();
+  };
+  onChangeInput = evt => {
+    const value = evt.target.value.toLowerCase();
     this.setState({ value });
   };
-  //так як це форма
-  hendlSudmit = e => {
-    e.preventDefault();
-    console.log(this.state);
-    this.props.hendlSearch(this.state.value);
-  };
-
   render() {
     return (
       <>
         <header className="searchbar">
-          <form className="form" onSubmit={this.hendlSudmit}>
+          <form className="form" onSubmit={this.onSubmitForm}>
             <button type="submit" className="button">
               <span className="button-label">Search</span>
             </button>
@@ -29,7 +33,7 @@ class Searchbar extends Component {
               autocomplete="off"
               autofocus
               placeholder="Search images and photos"
-              onChange={this.hendlChange}
+              onChange={this.onChangeInput}
               value={this.state.value}
             />
           </form>
@@ -39,3 +43,7 @@ class Searchbar extends Component {
   }
 }
 export default Searchbar;
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
