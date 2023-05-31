@@ -14,7 +14,6 @@ export class ImageGallery extends Component {
     componentDidUpdate(prevProps, prevState) {
         const text = this.props.searchText.trim()
         if (prevProps.searchText !== text && text) {
-          //fetch()
         }
         }
         render() {
