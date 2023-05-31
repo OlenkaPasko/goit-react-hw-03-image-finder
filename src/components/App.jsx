@@ -9,12 +9,6 @@ export class App extends Component {
     query: '',
     searchText: '',
   };
-  //fetch
-  //componentDidMount() {}
-  //fetch
-
-  //componentDidUpdate(prevProps, prevState) {}
-  //змінює стейт
   hendlSearch = text => {
     this.setState({ searchText: text });
   };
