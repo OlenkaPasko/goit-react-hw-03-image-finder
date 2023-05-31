@@ -1,34 +1,33 @@
-import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
-import PropTypes from 'prop-types';
-import { Button } from './Button/Button';
-import { Loader } from '../Loader/Loader';
+import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem'
+import { Button } from '../Button/Button';
+import { Loader } from '../Loader/Loader'
 //import { Button } from './Button.styled';
 //import { getImages } from 'services/getImages';
+import PropTypes from 'prop-types';
 
-import {Ul} from './ImageGallery.styled';
+import { Ul } from './ImageGallery.styled';
 
 export const ImageGallery = ({ images, spinner, loadPage, openModal }) => {
   return (
     <>
       {spinner && <Loader />}
-     
-        <>
-          <Ul>
-            {images.map(image => {
-              const { id, webformatURL, largeImageURL } = image;
-              return (
-                <ImageGalleryItem
-                  key={id}
-                  id={id}
-                  smallImg={webformatURL}
-                  largeImg={largeImageURL}
-                  openModal={openModal}
-                />
-              );
-            })}
-          </Ul>
-          <Button OnLoadMore={loadPage} />
-        </>
+      <>
+        <Ul>
+          {images.map(image => {
+            const { id, webformatURL, largeImageURL } = image;
+            return (
+              <ImageGalleryItem
+                key={id}
+                id={id}
+                smallImg={webformatURL}
+                largeImg={largeImageURL}
+                openModal={openModal}
+              />
+            );
+          })}
+        </Ul>
+        <Button OnLoadMore={loadPage}/>
+      </>
     </>
   );
 };

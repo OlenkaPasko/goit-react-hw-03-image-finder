@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
+//import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
+
 
 export class App extends Component {
   state = {
     images: [],
     searchValue: '',
     page: 1,
+    perPage: '12',
   };
 
   getGallery = (searchValue, page = 1) => {
@@ -30,17 +33,20 @@ export class App extends Component {
   handleSubmit = searchValue => {
     this.setState({ searchValue });
   };
+  onLoadMore = () => {
+    const { perPage } = this.state;
+    this.setState({ perPage: perPage + 12 });
+  };
+  onFormSubmit = value => {
+    this.setState({ value, perPage: 12, collection: null });
+  };
   render() {
-    const { searchValue } = this.state;
+
 
     return (
       <>
         <Searchbar onSubmit={this.onFormSubmit} />
-        <ImageGallery
-          value={searchValue}
-          loadPage={this.onLoadMore}
-          openModal={this.openModal}
-        />
+        <ImageGallery loadPage={this.onLoadMore} />
       </>
     );
   }
