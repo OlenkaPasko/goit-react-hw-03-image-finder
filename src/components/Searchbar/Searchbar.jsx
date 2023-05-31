@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Searchbar extends Component {
+class Searchbar extends Component {
   state = {
     value: '',
   };
@@ -11,8 +11,8 @@ export default class Searchbar extends Component {
   //так як це форма
   hendlSudmit = e => {
     e.preventDefault();
-      console.log(this.state);
-      this.props.hendlSearch(this.state.value)
+    console.log(this.state);
+    this.props.hendlSearch(this.state.value);
   };
 
   render() {
@@ -38,3 +38,4 @@ export default class Searchbar extends Component {
     );
   }
 }
+export default Searchbar;

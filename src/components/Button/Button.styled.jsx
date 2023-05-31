@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
-export const Button = styled.button`
+export const Btn = styled.button`
   pading: 10px;
 `;
