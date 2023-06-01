@@ -5,9 +5,9 @@ import { Header, SearchForm, SearchInput, SearchBtn } from './Searchbar.styled';
 
 class Searchbar extends Component {
   state = {
-    value: ''
+    value: '',
   };
-  onSubmitForm = evt => {
+  onFormSubmit = evt => {
     const { value } = this.state;
     evt.preventDefault();
     if (value.trim() === '') {
@@ -23,22 +23,22 @@ class Searchbar extends Component {
   };
   render() {
     return (
-        <Header>
-          <SearchForm onSubmit={this.onSubmitForm}>
-            <SearchBtn>
-              <span className="button-label">Search</span>
-            </SearchBtn>
-            <SearchInput
-              type="text"
-              autocomplete="off"
-              autofocus
-              placeholder="Search images and photos"
-              onChange={this.onChangeInput}
-              value={this.state.value}
-              name="searchInput"
-            />
-          </SearchForm>
-        </Header>
+      <Header>
+        <SearchForm onSubmit={this.onFormSubmit}>
+          <SearchBtn>
+            <span className="button-label">Search</span>
+          </SearchBtn>
+          <SearchInput
+            type="text"
+            autocomplete="off"
+            autofocus
+            placeholder="Search images and photos"
+            onChange={this.onChangeInput}
+            value={this.state.value}
+            name="searchInput"
+          />
+        </SearchForm>
+      </Header>
     );
   }
 }

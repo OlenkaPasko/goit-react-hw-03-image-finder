@@ -11,12 +11,12 @@ export class App extends Component {
     perPage: '12',
     alt: null,
   };
-  fetchAPI = (text, page) => {
-    const API_KEY = '35113425-894140f70267936d7d418e310';
-    const BASE_URL = 'https://pixabay.com/api/';
+  fetchAPI = (value, perPage) => {
+    //const API_KEY = '35113425-894140f70267936d7d418e310';
+    //const BASE_URL = 'https://pixabay.com/api/';
     setTimeout(() => {
       fetch(
-        `${BASE_URL}?key=${API_KEY}&image_type=photo&orientation=horizontal&q=${text}&page=${page}&image_type=photo&orientation=horizontal&per_page=12`
+        `https://pixabay.com/api/?key=35113425-894140f70267936d7d418e310&q='${value}'&image_type=photo&orientation=horizontal&safesearch=true&per_page=${perPage}`
       )
         .then(res => res.json())
         .then(data => {
@@ -26,7 +26,7 @@ export class App extends Component {
         .finally(() => {
           this.setState({ loading: false });
         });
-    }, 300);
+    }, 500);
   };
   componentDidUpdate(_, prevState) {
     const { perPage, value } = this.state;
