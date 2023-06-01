@@ -15,7 +15,7 @@ export class App extends Component {
     collection: null,
     loading: false,
     error: null,
-    
+
     page: 1,
     totalPages: 0,
   };
@@ -45,35 +45,6 @@ export class App extends Component {
       })
       .catch(error => this.setState({ error, status: Status.REJECTED }));
   }
-
-  //
-
-  //onentDidUpdate(prevProps, prevState) {
-  //nst { page } = this.state;
-  //nst prevValue = prevProps.value;
-  //nst nextValue = this.props.value;
-  //
-  //страхуємо від повторного запиту
-  // (prevValue !== nextValue || prevState.page !== page) {
-  //this.setState({ status: Status.PENDING });
-
-  ////перевіряємо чи є помилка
-  //if (this.state.error) {
-  //  this.setState({ error: null });
-  //}
-  //fetchAPI
-  //  .api(nextValue, page)
-  //  .then(images => {
-  //    this.setState(prevState => ({
-  //      images:
-  //        page === 1 ? images.hits : [...prevState.images, ...images.hits],
-  //      status: Status.RESOLVED,
-  //      totalPages: Math.floor(images.totalHits / 12),
-  //    }));
-  //  })
-  //  .catch(error => this.setState({ error, status: Status.REJECTED }));
-  //
-  //
 
   onLoadMore = () => {
     //const { page } = this.state;
