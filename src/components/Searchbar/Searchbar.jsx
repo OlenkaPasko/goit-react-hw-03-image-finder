@@ -10,12 +10,12 @@ class Searchbar extends Component {
   onFormSubmit = evt => {
     const { value } = this.state;
     evt.preventDefault();
-    if (value.trim() === '') {
+    if (!value.trim()) {
       alert('Please, type any words');
       return;
     }
+    this.props.onSubmit(this.state.value);
     this.setState({ value: '' });
-    evt.target.elements.searchInput.blur();
   };
   onChangeInput = evt => {
     const value = evt.target.value.toLowerCase();
@@ -30,8 +30,8 @@ class Searchbar extends Component {
           </SearchBtn>
           <SearchInput
             type="text"
-            autocomplete="off"
-            autofocus
+            autoComplete="off"
+            autoFocus
             placeholder="Search images and photos"
             onChange={this.onChangeInput}
             value={this.state.value}
