@@ -1,5 +1,5 @@
-const API_KEY = '35113425-894140f70267936d7d418e310';
-const BASE_URL = 'https://pixabay.com/api/';
+let API_KEY = '35113425-894140f70267936d7d418e310';
+let BASE_URL = 'https://pixabay.com/api/';
 
 const fetchAPI = (value, page) => {
   setTimeout(() => {
