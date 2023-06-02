@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
-import fetchAPI from 'services/services';
+import api from 'services/services';
 
 export class App extends Component {
   state = {
@@ -18,18 +18,17 @@ export class App extends Component {
   componentDidUpdate(_, prevState) {
     const { page, value } = this.state;
     if (prevState.page !== page) {
-      this.setState({ isLoading: true });
+      this.setState({ loading: true });
       //fetchAPI(value, page);
       return;
     }
 
     if (prevState.value !== value) {
-      this.setState({ isLoading: true });
+      this.setState({ loading: true });
       //fetchAPI(value, page);
       return;
     }
-    fetchAPI
-      .api(page,value)
+      api(value, page)
       .then(images => {
         this.setState(prevState => ({
           images:

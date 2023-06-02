@@ -16,7 +16,7 @@ const fetchAPI = (value, page) => {
       });
   }, 500);
 };
-export const api = {
+const api = {
   fetchAPI,
 };
 export default api;
