@@ -19,13 +19,13 @@ export class App extends Component {
     const { page, value } = this.state;
     if (prevState.page !== page) {
       this.setState({ loading: true });
-      //fetchAPI(value, page);
+    //api.fetchAPI(value, page);
       return;
     }
 
     if (prevState.value !== value) {
       this.setState({ loading: true });
-      //fetchAPI(value, page);
+      //api.fetchAPI(value, page);
       return;
     }
    api
@@ -38,7 +38,16 @@ export class App extends Component {
        }));
      })
     .catch(error => this.setState({ error }));
-  }
+  } //.then(res => res.json())
+    //  .then(data => {
+    //    const collection = data.hits;
+    //    this.setState({ collection });
+    //  })
+    //  .finally(() => {
+    //    this.setState({ loading: false });
+    //  });
+
+
   onLoadMore = () => {
     //const { page } = this.state;
     this.setState(prevState => ({ page: prevState.page + 1 }));
