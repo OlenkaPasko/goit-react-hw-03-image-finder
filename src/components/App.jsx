@@ -4,11 +4,6 @@ import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import fetchAPI from 'services/services';
 
-const Status = {
-  PENDING: 'pending',
-  RESOLVED: 'resolved',
-  REJECTED: 'rejected',
-};
 export class App extends Component {
   state = {
     value: '',
@@ -23,27 +18,26 @@ export class App extends Component {
   componentDidUpdate(_, prevState) {
     const { page, value } = this.state;
     if (prevState.page !== page) {
-      this.setState({ loading: true });
-      this.api(value, page);
+      this.setState({ isLoading: true });
+      //fetchAPI(value, page);
       return;
     }
 
     if (prevState.value !== value) {
-      this.setState({ loading: true });
-      this.api(value, page);
+      this.setState({ isLoading: true });
+      //fetchAPI(value, page);
       return;
     }
     fetchAPI
-      .api(value, page)
+      .api(page,value)
       .then(images => {
         this.setState(prevState => ({
           images:
             page === 1 ? images.hits : [...prevState.images, ...images.hits],
-          status: Status.RESOLVED,
           totalPages: Math.floor(images.totalHits / 12),
         }));
       })
-      .catch(error => this.setState({ error, status: Status.REJECTED }));
+      .catch(error => this.setState({ error }));
   }
 
   onLoadMore = () => {
