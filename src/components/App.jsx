@@ -15,11 +15,11 @@ export class App extends Component {
     totalPages: 0,
   };
 
-  componentDidUpdate(_, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     const { page, value } = this.state;
-    if (prevState.page !== page) {
+    if (prevProps.page !== this.props.page) {
       this.setState({ loading: true });
-    //api.fetchAPI(value, page);
+      //api.fetchAPI(value, page);
       return;
     }
 
