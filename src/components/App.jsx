@@ -28,17 +28,17 @@ export class App extends Component {
       //fetchAPI(value, page);
       return;
     }
-      api(value, page)
-      .then(images => {
-        this.setState(prevState => ({
-          images:
-            page === 1 ? images.hits : [...prevState.images, ...images.hits],
-          totalPages: Math.floor(images.totalHits / 12),
-        }));
-      })
-      .catch(error => this.setState({ error }));
+   api
+     .fetchAPI(value, page)
+     .then(images => {
+       this.setState(prevState => ({
+        images:
+           page === 1 ? images.hits : [...prevState.images, ...images.hits],
+         totalPages: Math.floor(images.totalHits / 12),
+       }));
+     })
+    .catch(error => this.setState({ error }));
   }
-
   onLoadMore = () => {
     //const { page } = this.state;
     this.setState(prevState => ({ page: prevState.page + 1 }));
