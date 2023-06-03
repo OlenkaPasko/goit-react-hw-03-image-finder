@@ -2,58 +2,19 @@ import React, { Component } from 'react';
 
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
-import api from 'services/services';
 
 export class App extends Component {
+
   state = {
-    value: '',
-    collection: null,
-    loading: false,
-    error: null,
-
-    page: 1,
-    totalPages: 0,
+    textSearch: '',
   };
-
-  componentDidUpdate(prevProps, prevState) {
-    const { page, value } = this.state;
-    if (prevProps.page !== this.props.page) {
-      this.setState({ loading: true });
-      //api.fetchAPI(value, page);
-      return;
-    }
-
-    if (prevState.value !== value) {
-      this.setState({ loading: true });
-      //api.fetchAPI(value, page);
-      return;
-    }
-   api
-     .fetchAPI(value, page)
-     .then(images => {
-       this.setState(prevState => ({
-        images:
-           page === 1 ? images.hits : [...prevState.images, ...images.hits],
-         totalPages: Math.floor(images.totalHits / 12),
-       }));
-     })
-    .catch(error => this.setState({ error }));
-  } //.then(res => res.json())
-    //  .then(data => {
-    //    const collection = data.hits;
-    //    this.setState({ collection });
-    //  })
-    //  .finally(() => {
-    //    this.setState({ loading: false });
-    //  });
-
 
   onLoadMore = () => {
     //const { page } = this.state;
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
   onFormSubmit = value => {
-    this.setState({ value, collection: null });
+    this.setState({ value });
   };
 
   render() {
