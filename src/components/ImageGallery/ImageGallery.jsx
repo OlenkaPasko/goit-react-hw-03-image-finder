@@ -4,12 +4,12 @@ import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 import Button from 'components/Button/Button';
 import { Loader } from '../Loader/Loader';
 import api from 'services/services';
-import ImageError from 'components/ImageError/ImageError';
+//import ImageError from 'components/ImageError/ImageError';
 
 import PropTypes from 'prop-types';
 
 const Status = {
-  //IDLE: 'idle',
+  IDLE: 'idle',
   PENDING: 'pending',
   RESOLVED: 'resolved',
   REJECTED: 'rejected',
@@ -20,7 +20,7 @@ export default class ImageGallery extends Component {
     value: '',
     images: [],
     error: null,
-    loading: true,
+
     status: Status.IDLE,
 
     page: 1,
@@ -33,7 +33,7 @@ export default class ImageGallery extends Component {
     const nextValue = this.props.value;
 
     if (prevValue !== nextValue || prevState.page !== page) {
-      this.setState({ loading: true });
+      this.setState({ status: Status.PENDING });
     }
 
     if (this.state.error) {
@@ -49,7 +49,7 @@ export default class ImageGallery extends Component {
           totalPages: Math.floor(images.totalHits / 12),
         }));
       })
-      .catch(error => this.setState({ error }));
+      .catch(error => this.setState({ error, status: Status.REJECTED }));
   }
   //btn
   handleLoadMore = () => {
@@ -62,14 +62,14 @@ export default class ImageGallery extends Component {
     if (status === 'pending') {
       return <Loader />;
     }
-    if (status === 'rejected') {
-      return <ImageError message={error.message} />;
-    }
-    if (images.length === 0) {
-      return (
-        <ImageError message={`There are no images matching your search`} />
-      );
-    }
+   //ejected') {
+   //ror message={error.message} />;
+   //
+   // === 0) {
+   //
+   //essage={`There are no images matching your search`} />
+   //
+   //
     return (
       <>
         <ul className="gallery">
