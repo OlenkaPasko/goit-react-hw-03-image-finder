@@ -6,7 +6,6 @@ import { Loader } from '../Loader/Loader';
 import api from 'services/services';
 
 import { Ul } from './ImageGallery.styled';
-//import ImageError from 'components/ImageError/ImageError';
 
 import PropTypes from 'prop-types';
 
@@ -38,7 +37,7 @@ export default class ImageGallery extends Component {
     const prevValue = prevProps.value;
     const nextValue = this.props.value;
 
-    //  повторний запит, якщо вже таке слово було введене
+    // повторний запит, якщо вже таке слово було введене
 
     if (prevValue !== nextValue || prevState.page !== page) {
       this.setState({ isLoading: true });
@@ -58,26 +57,24 @@ export default class ImageGallery extends Component {
             totalPages: Math.floor(images.totalHits / 12),
           }));
         })
-        .catch(error => this.setState({ error }));
+        .catch(error => this.setState({ error }))
+        .finally(() => {
+          this.setState({ isLoading: false });
+        });
     }
   }
 
- 
   handleLoadMore = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   render() {
-    const { images,spinner, error} = this.state;
-
+    const { images, spinner, isLoading, error } = this.state;
     return (
       <>
-        {spinner && <Loader />} 
-        {error && (
-          <div className="alert" role="alert">
-            {error}
-          </div>
-        )}
+        {spinner && <Loader />}
+        {error && <p>Whoops, something went wrong: {error.message}</p>}
+        {isLoading && <p>Loading...</p>}
         {images.length > 0 && (
           <Ul>
             {images.map(image => (
