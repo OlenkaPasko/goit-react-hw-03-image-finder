@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { toast } from 'react-toastify';
+import { notifyOptions } from 'notify/notify';
+
 import { Header, SearchForm, SearchInput, SearchBtn } from './Searchbar.styled';
 
 class Searchbar extends Component {
@@ -12,12 +15,12 @@ class Searchbar extends Component {
     this.setState({ value });
   };
   onFormSubmit = evt => {
-    const { value } = this.state;
+    //const { value } = this.state;
     evt.preventDefault();
-    if (!value.trim()) {
-      alert('Please, type any words');
-      return;
+    if (this.state.value.trim() === '') {
+      return toast.error('Please enter key words for search',notifyOptions);
     }
+    //HTTP запит 
     this.props.onSubmit(this.state.value);
     this.setState({ value: '' });
   };

@@ -53,7 +53,7 @@ export default class ImageGallery extends Component {
           this.setState(prevState => ({
             images:
               page === 1 ? images.hits : [...prevState.images, ...images.hits],
-            isLoading: true,
+           
             totalPages: Math.floor(images.totalHits / 12),
           }));
         })
@@ -78,7 +78,11 @@ export default class ImageGallery extends Component {
         {images.length > 0 && (
           <Ul>
             {images.map(image => (
-              <ImageGalleryItem key={image.id} item={image} />
+              <ImageGalleryItem
+                key={image.id}
+                item={image}
+                onImageClick
+              />
             ))}
           </Ul>
         )}
