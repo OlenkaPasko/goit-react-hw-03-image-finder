@@ -1,17 +1,20 @@
 import PropTypes from 'prop-types';
 import { Btn } from './Button.styled';
-const Button = ({ OnLoadMore }) => {
+
+const Button = ({ children, type = 'button', onClick = null }) => {
   return (
     <>
-      <Btn type="button" onClick={OnLoadMore} className="button">
-        Load More
+      <Btn type={type} onClick={onClick}>
+        {children}
       </Btn>
     </>
   );
 };
 
-Button.propTypes = {
-  OnLoadMore: PropTypes.func.isRequired,
+Btn.propTypes = {
+  type: PropTypes.string,
+  onClick: PropTypes.func,
+  children: PropTypes.any,
 };
 
 export default Button;

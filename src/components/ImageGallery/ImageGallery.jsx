@@ -4,6 +4,8 @@ import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 import Button from 'components/Button/Button';
 import { Loader } from '../Loader/Loader';
 import api from 'services/services';
+
+import { Ul } from './ImageGallery.styled';
 //import ImageError from 'components/ImageError/ImageError';
 
 import PropTypes from 'prop-types';
@@ -60,21 +62,29 @@ export default class ImageGallery extends Component {
     }
   }
 
-  // custom method to btn load
+ 
   handleLoadMore = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   render() {
-    const { images, error, page, totalPages } = this.state;
+    const { images,spinner, error} = this.state;
 
     return (
       <>
-        <ul>
-          {images.map(image => (
-            <ImageGalleryItem key={image.id} item={image} />
-          ))}
-        </ul>
+        {spinner && <Loader />} 
+        {error && (
+          <div className="alert" role="alert">
+            {error}
+          </div>
+        )}
+        {images.length > 0 && (
+          <Ul>
+            {images.map(image => (
+              <ImageGalleryItem key={image.id} item={image} />
+            ))}
+          </Ul>
+        )}
         <Button onClick={this.handleLoadMore}>Load More</Button>
       </>
     );
