@@ -93,6 +93,7 @@ class ImageGallery extends Component {
               />
             ))}
           </Ul>
+          
         )}
         <Button onClick={this.handleLoadMore}>Load More</Button>
         {isShowModal && (

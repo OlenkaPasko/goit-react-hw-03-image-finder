@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
+import { ModalBackdrop, ModalContent } from './Modal.styled';
+
 const modalRoot = document.querySelector('#modal-root');
 
  class Modal extends Component {
@@ -37,11 +39,11 @@ const modalRoot = document.querySelector('#modal-root');
     const { largeImageURL, tags } = this.props.modalData;
 
     return createPortal(
-      <div onClick={this.handleBackdropeClick}>
-        <div>
+      <ModalBackdrop onClick={this.handleBackdropeClick}>
+        <ModalContent>
           <img src={largeImageURL} alt={tags} />
-        </div>
-      </div>,
+        </ModalContent>
+      </ModalBackdrop>,
       modalRoot
     );
   }
