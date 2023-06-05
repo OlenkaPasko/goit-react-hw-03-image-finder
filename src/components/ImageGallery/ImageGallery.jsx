@@ -6,10 +6,11 @@ import { Loader } from '../Loader/Loader';
 import api from 'services/services';
 
 import { Ul } from './ImageGallery.styled';
+import Modal from 'components/Modal/Modal';
 
 import PropTypes from 'prop-types';
 
-export default class ImageGallery extends Component {
+class ImageGallery extends Component {
   static propTypes = {
     value: PropTypes.string.isRequired,
   };
@@ -22,6 +23,9 @@ export default class ImageGallery extends Component {
 
     page: 1,
     totalPages: 0,
+
+    isShowModal: false,
+    modalData: { tags: '' },
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -33,7 +37,6 @@ export default class ImageGallery extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { page } = this.state;
-    const { searchText } = this.state;
     const prevValue = prevProps.value;
     const nextValue = this.props.value;
 
@@ -41,19 +44,17 @@ export default class ImageGallery extends Component {
 
     if (prevValue !== nextValue || prevState.page !== page) {
       this.setState({ isLoading: true });
-
       // чи є помилка, якщо є - записуємо null
-
       if (this.state.error) {
         this.setState({ error: null });
       }
       api
-        .fetchAPI(searchText, page)
+        .fetchAPI(nextValue, page)
         .then(images => {
           this.setState(prevState => ({
             images:
               page === 1 ? images.hits : [...prevState.images, ...images.hits],
-           
+
             totalPages: Math.floor(images.totalHits / 12),
           }));
         })
@@ -67,9 +68,16 @@ export default class ImageGallery extends Component {
   handleLoadMore = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
+  setModalData = modalData => {
+    this.setState({ modalData, isShowModal: true });
+  };
 
+  handleModalClose = () => {
+    this.setState({ isShowModal: false });
+  };
   render() {
-    const { images, spinner, isLoading, error } = this.state;
+    const { images, spinner, isLoading, error, isShowModal, modalData } =
+      this.state;
     return (
       <>
         {spinner && <Loader />}
@@ -81,13 +89,17 @@ export default class ImageGallery extends Component {
               <ImageGalleryItem
                 key={image.id}
                 item={image}
-                onImageClick
+                onImageClick={this.setModalData}
               />
             ))}
           </Ul>
         )}
         <Button onClick={this.handleLoadMore}>Load More</Button>
+        {isShowModal && (
+          <Modal modalData={modalData} onModalClose={this.handleModalClose} />
+        )}
       </>
     );
   }
 }
+export default ImageGallery;

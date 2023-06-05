@@ -6,20 +6,20 @@ import ImageGallery from './ImageGallery/ImageGallery';
 
 export class App extends Component {
   state = {
-    textSearch: '',
+    searchText: '',
   };
 
-  handleSubmit = textSearch => {
-    this.setState({ textSearch });
+  handleSubmit = searchText => {
+    this.setState({ searchText });
   };
 
   render() {
-    const { textSearch } = this.state;
+    const { searchText } = this.state;
 
     return (
       <>
         <Searchbar onSubmit={this.handleSubmit} />
-        <ImageGallery value={textSearch} />
+        <ImageGallery value={searchText} />
         <ToastContainer autoClose={3000} />
       </>
     );

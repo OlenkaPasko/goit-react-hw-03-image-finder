@@ -18,7 +18,7 @@ class Searchbar extends Component {
     //const { value } = this.state;
     evt.preventDefault();
     if (this.state.value.trim() === '') {
-      return toast.error('Please enter key words for search',notifyOptions);
+      return toast.error('Please enter key words for search', notifyOptions);
     }
     //HTTP запит 
     this.props.onSubmit(this.state.value);
