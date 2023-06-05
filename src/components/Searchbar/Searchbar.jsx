@@ -7,6 +7,10 @@ class Searchbar extends Component {
   state = {
     value: '',
   };
+  onChangeInput = evt => {
+    const value = evt.target.value.toLowerCase();
+    this.setState({ value });
+  };
   onFormSubmit = evt => {
     const { value } = this.state;
     evt.preventDefault();
@@ -17,10 +21,7 @@ class Searchbar extends Component {
     this.props.onSubmit(this.state.value);
     this.setState({ value: '' });
   };
-  onChangeInput = evt => {
-    const value = evt.target.value.toLowerCase();
-    this.setState({ value });
-  };
+
   render() {
     return (
       <Header>
@@ -35,7 +36,6 @@ class Searchbar extends Component {
             placeholder="Search images and photos"
             onChange={this.onChangeInput}
             value={this.state.value}
-            name="searchInput"
           />
         </SearchForm>
       </Header>
@@ -47,4 +47,3 @@ Searchbar.propTypes = {
 };
 
 export default Searchbar;
-
