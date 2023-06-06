@@ -1,28 +1,45 @@
 import styled from 'styled-components';
 
 export const Header = styled.header`
-  max-width: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0 auto;
+  position: sticky;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  pading 10px;
+
+  background-color: blue;
+  border-radius: 10px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 3px 3px -2px,
+    rgb(0 0 0 / 14%) 0px 3px 4px 0px, rgb(0 0 0 / 12%) 0px 1px 8px 0px;
 `;
 export const SearchForm = styled.form`
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  
+  margin-right: auto;
+  margin-left: auto;
   width: 100%;
 `;
 export const SearchBtn = styled.button`
   display: inline-block;
-  width: 50px;
-  height: 50px;
   border: 0;
   ursor: pointer;
   outline: none;
   background-image: url('https://cdn-icons-png.flaticon.com/512/149/149852.png');
+
+
 `;
 
 export const SearchInput = styled.input`
-  display: inline-block;
-  width: 100%;
+  display: flex;
+
+  width: 600px;
+  height: 30px;
   font: inherit;
+  border: none;
+  outline: none;
+  border: 1px solid darkblue;
 `;
