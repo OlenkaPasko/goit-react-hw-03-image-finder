@@ -7,6 +7,5 @@ export const notifyOptions = {
   closeOnClick: true,
   pauseOnHover: true,
   draggable: true,
-  theme: 'colored',
   toastId: customId,
 };

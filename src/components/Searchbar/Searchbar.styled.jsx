@@ -26,11 +26,9 @@ export const SearchForm = styled.form`
 export const SearchBtn = styled.button`
   display: inline-block;
   border: 0;
-  ursor: pointer;
+  cursor: pointer;
   outline: none;
-  background-image: url('https://cdn-icons-png.flaticon.com/512/149/149852.png');
-
-
+  opacity: 0.6;
 `;
 
 export const SearchInput = styled.input`

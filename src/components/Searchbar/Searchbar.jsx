@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { notifyOptions } from 'notify/notify';
 
 import { Header, SearchForm, SearchInput, SearchBtn } from './Searchbar.styled';
+import { FaSistrix } from 'react-icons/fa';
 
 class Searchbar extends Component {
   state = {
@@ -20,7 +21,7 @@ class Searchbar extends Component {
     if (this.state.value.trim() === '') {
       return toast.error('Please enter key words for search', notifyOptions);
     }
-    //HTTP запит 
+    //HTTP запит
     this.props.onSubmit(this.state.value);
     this.setState({ value: '' });
   };
@@ -30,7 +31,7 @@ class Searchbar extends Component {
       <Header>
         <SearchForm onSubmit={this.onFormSubmit}>
           <SearchBtn>
-            <span className="button-label">Search</span>
+            <FaSistrix size="24" />
           </SearchBtn>
           <SearchInput
             type="text"
